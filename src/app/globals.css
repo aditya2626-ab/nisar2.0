@@ -1,0 +1,379 @@
+@import "leaflet/dist/leaflet.css";
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+/*
+ * NISAR PULSE — fixed dark observatory theme.
+ * Deep space charcoal with a whisper of teal; radar-green primary.
+ */
+:root,
+.dark {
+  --radius: 0.625rem;
+  --background: oklch(0.145 0.012 210);
+  --foreground: oklch(0.93 0.008 180);
+  --card: oklch(0.185 0.015 205);
+  --card-foreground: oklch(0.93 0.008 180);
+  --popover: oklch(0.19 0.016 205);
+  --popover-foreground: oklch(0.93 0.008 180);
+  --primary: oklch(0.8 0.135 172);
+  --primary-foreground: oklch(0.15 0.03 175);
+  --secondary: oklch(0.24 0.018 205);
+  --secondary-foreground: oklch(0.93 0.008 180);
+  --muted: oklch(0.225 0.016 205);
+  --muted-foreground: oklch(0.66 0.018 200);
+  --accent: oklch(0.26 0.03 178);
+  --accent-foreground: oklch(0.93 0.008 180);
+  --destructive: oklch(0.66 0.2 22);
+  --border: oklch(1 0 0 / 9%);
+  --input: oklch(1 0 0 / 14%);
+  --ring: oklch(0.8 0.135 172 / 60%);
+  --chart-1: oklch(0.8 0.135 172);
+  --chart-2: oklch(0.83 0.13 85);
+  --chart-3: oklch(0.7 0.19 14);
+  --chart-4: oklch(0.78 0.14 162);
+  --chart-5: oklch(0.72 0.14 300);
+  --sidebar: oklch(0.185 0.015 205);
+  --sidebar-foreground: oklch(0.93 0.008 180);
+  --sidebar-primary: oklch(0.8 0.135 172);
+  --sidebar-primary-foreground: oklch(0.15 0.03 175);
+  --sidebar-accent: oklch(0.26 0.03 178);
+  --sidebar-accent-foreground: oklch(0.93 0.008 180);
+  --sidebar-border: oklch(1 0 0 / 9%);
+  --sidebar-ring: oklch(0.8 0.135 172 / 60%);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-background text-foreground;
+    background-image:
+      radial-gradient(ellipse 80% 50% at 20% -10%, oklch(0.25 0.05 190 / 0.35), transparent),
+      radial-gradient(ellipse 60% 40% at 85% 0%, oklch(0.24 0.04 160 / 0.22), transparent);
+    background-attachment: fixed;
+  }
+  ::selection {
+    background: oklch(0.8 0.135 172 / 30%);
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Starfield                                                           */
+/* ------------------------------------------------------------------ */
+
+.starfield {
+  background-image:
+    radial-gradient(1px 1px at 12% 24%, oklch(0.95 0 0 / 0.7) 50%, transparent 51%),
+    radial-gradient(1px 1px at 38% 68%, oklch(0.95 0 0 / 0.5) 50%, transparent 51%),
+    radial-gradient(1.5px 1.5px at 62% 18%, oklch(0.95 0 0 / 0.8) 50%, transparent 51%),
+    radial-gradient(1px 1px at 78% 52%, oklch(0.95 0 0 / 0.55) 50%, transparent 51%),
+    radial-gradient(1.5px 1.5px at 88% 82%, oklch(0.95 0 0 / 0.65) 50%, transparent 51%),
+    radial-gradient(1px 1px at 24% 88%, oklch(0.95 0 0 / 0.45) 50%, transparent 51%),
+    radial-gradient(1px 1px at 52% 42%, oklch(0.95 0 0 / 0.6) 50%, transparent 51%),
+    radial-gradient(2px 2px at 70% 78%, oklch(0.9 0.02 180 / 0.5) 50%, transparent 51%),
+    radial-gradient(1px 1px at 8% 58%, oklch(0.95 0 0 / 0.5) 50%, transparent 51%),
+    radial-gradient(1px 1px at 44% 8%, oklch(0.95 0 0 / 0.6) 50%, transparent 51%);
+  background-size: 560px 560px;
+}
+
+/* ------------------------------------------------------------------ */
+/* Radar sweep (hero)                                                  */
+/* ------------------------------------------------------------------ */
+
+.radar-ring {
+  border: 1px solid oklch(0.8 0.135 172 / 18%);
+  border-radius: 9999px;
+}
+
+.radar-sweep {
+  border-radius: 9999px;
+  background: conic-gradient(
+    from 0deg,
+    oklch(0.8 0.135 172 / 0.45) 0deg,
+    oklch(0.8 0.135 172 / 0.12) 55deg,
+    transparent 90deg,
+    transparent 360deg
+  );
+  animation: radar-sweep-rot 4.2s linear infinite;
+  mask-image: radial-gradient(circle, black 0%, black 100%);
+}
+
+@keyframes radar-sweep-rot {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.radar-blip {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  background: var(--blip, oklch(0.8 0.135 172));
+  box-shadow: 0 0 10px 2px color-mix(in oklab, var(--blip, oklch(0.8 0.135 172)) 70%, transparent);
+  animation: blip-fade 4.2s linear infinite;
+}
+
+@keyframes blip-fade {
+  0%,
+  12% {
+    opacity: 0;
+  }
+  20%,
+  68% {
+    opacity: 1;
+  }
+  88%,
+  100% {
+    opacity: 0;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Map markers                                                         */
+/* ------------------------------------------------------------------ */
+
+.nisar-marker {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.nisar-dot {
+  position: absolute;
+  inset: 3px;
+  border-radius: 9999px;
+  background: var(--c);
+  box-shadow:
+    0 0 6px 1px color-mix(in oklab, var(--c) 80%, transparent),
+    inset 0 0 2px oklch(1 0 0 / 60%);
+  border: 1.5px solid oklch(0.14 0.02 210 / 90%);
+  transition: transform 0.25s ease;
+}
+
+.nisar-marker:hover .nisar-dot {
+  transform: scale(1.35);
+}
+
+.nisar-marker.is-selected .nisar-dot {
+  transform: scale(1.5);
+  border-color: oklch(0.98 0 0 / 90%);
+}
+
+.nisar-marker.is-selected::after {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border-radius: 9999px;
+  border: 2px solid var(--c);
+  animation: marker-ping 1.6s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes marker-ping {
+  0% {
+    transform: scale(0.55);
+    opacity: 0.9;
+  }
+  80%,
+  100% {
+    transform: scale(1.9);
+    opacity: 0;
+  }
+}
+
+.sat-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 9999px;
+  background: oklch(0.2 0.02 210 / 85%);
+  border: 1px solid oklch(0.8 0.135 172 / 60%);
+  color: oklch(0.8 0.135 172);
+  box-shadow: 0 0 12px 2px oklch(0.8 0.135 172 / 35%);
+}
+
+/* ------------------------------------------------------------------ */
+/* Leaflet dark theme                                                  */
+/* ------------------------------------------------------------------ */
+
+.leaflet-container {
+  background: oklch(0.13 0.015 215);
+  font-family: var(--font-geist-sans), sans-serif;
+  outline: none;
+}
+
+.leaflet-control-attribution {
+  background: oklch(0.14 0.015 210 / 72%) !important;
+  color: oklch(0.62 0.015 200) !important;
+  font-size: 9px !important;
+  backdrop-filter: blur(4px);
+}
+
+.leaflet-control-attribution a {
+  color: oklch(0.72 0.1 172) !important;
+}
+
+.leaflet-bar,
+.leaflet-bar a {
+  background: oklch(0.2 0.018 205 / 92%) !important;
+  color: oklch(0.9 0.01 180) !important;
+  border-color: oklch(1 0 0 / 10%) !important;
+}
+
+.leaflet-bar a:hover {
+  background: oklch(0.28 0.025 195 / 95%) !important;
+}
+
+.leaflet-popup-content-wrapper,
+.leaflet-popup-tip {
+  background: oklch(0.2 0.018 205 / 96%);
+  color: oklch(0.93 0.008 180);
+  border: 1px solid oklch(1 0 0 / 12%);
+  box-shadow: 0 10px 30px oklch(0 0 0 / 45%);
+}
+
+.leaflet-popup-content {
+  margin: 10px 14px;
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.leaflet-popup-close-button {
+  color: oklch(0.65 0.015 200) !important;
+}
+
+.leaflet-tooltip.nisar-tooltip {
+  background: oklch(0.2 0.018 205 / 94%);
+  border: 1px solid oklch(1 0 0 / 14%);
+  color: oklch(0.88 0.01 180);
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  box-shadow: none;
+}
+
+.leaflet-tooltip.nisar-tooltip::before {
+  display: none;
+}
+
+.swath-outline {
+  stroke-dasharray: 7 7;
+  animation: swath-dash 1.6s linear infinite;
+}
+
+@keyframes swath-dash {
+  to {
+    stroke-dashoffset: -28;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Utilities                                                           */
+/* ------------------------------------------------------------------ */
+
+.glass {
+  background: oklch(0.17 0.015 205 / 72%);
+  backdrop-filter: blur(12px);
+  border: 1px solid oklch(1 0 0 / 9%);
+}
+
+.scroll-thin {
+  scrollbar-width: thin;
+  scrollbar-color: oklch(0.4 0.02 200) transparent;
+}
+
+.scroll-thin::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.scroll-thin::-webkit-scrollbar-thumb {
+  background: oklch(0.38 0.025 195);
+  border-radius: 9999px;
+}
+
+.scroll-thin::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.telemetry-ticker {
+  mask-image: linear-gradient(90deg, transparent, black 6%, black 94%, transparent);
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 36s linear infinite;
+  width: max-content;
+}
+
+.fringe-strip {
+  background: linear-gradient(
+    90deg,
+    hsl(0 95% 60%),
+    hsl(60 95% 55%),
+    hsl(120 90% 50%),
+    hsl(180 90% 50%),
+    hsl(240 95% 62%),
+    hsl(300 95% 58%),
+    hsl(360 95% 60%)
+  );
+}
+
+.unwrapped-strip {
+  background: linear-gradient(90deg, oklch(0.16 0.03 230), oklch(0.5 0.09 200), oklch(0.78 0.12 172), oklch(0.9 0.12 95));
+}
