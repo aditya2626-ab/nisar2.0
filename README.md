@@ -153,13 +153,9 @@ If you ever change `prisma/schema.prisma`, re-run both commands.
 
 
 if it not run then 
-'''bash
+```bash
 node -e "const fs=require('fs');const p=JSON.parse(fs.readFileSync('package.json','utf8'));p.scripts.dev='next dev -p 3000';fs.writeFileSync('package.json',JSON.stringify(p,null,2));"
-
-
-
-'''
-
+```
 ### 5. Run the development server
 
 ```bash
